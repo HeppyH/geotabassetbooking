@@ -1,0 +1,7 @@
+# Phase E — Booking Workflow: Executive Summary
+
+**Status: domain logic and native-provider enforcement complete at code level; `LIVE_BOOKING_WRITE_ENABLED` stays false; UI not rewired; NOT tenant-validated.** Git state unverifiable (ZIP baseline).
+
+Delivered as pure, tested modules under `apps/web/src/booking/`: a centralized state machine (existing statuses preserved), time-zone-aware scheduling (default Asia/Jakarta, cross-midnight and multi-day, ambiguous/non-existent DST times rejected), interval-overlap detection with duplicate detection and post-write reconciliation, a validated booking record model, and filter/search/visibility helpers. The native provider now runs every status change through the state machine using the verified actor, so invalid transitions, self-approval, missing rejection reasons, spoofed approver ids and repeated actions are handled before any write.
+
+**Concurrency, stated honestly:** double-booking protection is NOT proven and cannot be with AddInData as documented (no atomic reservation / transaction). The code detects conflicts before writing and after writing (deterministic winner = earliest `createdAt`, then id), so a double booking is surfaced for a person to reconcile. A Get → check → Add sequence does not prevent it, and the code does not claim it does. Live writes therefore remain disabled pending a business decision (see remaining-blockers).

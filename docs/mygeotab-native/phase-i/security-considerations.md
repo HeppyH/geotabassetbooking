@@ -1,0 +1,5 @@
+# Security Assessment
+**Enforced by code (client-side, in this application):** capability gates and tenant allowlist; identity and active-user checks; role mapping; state-machine and ownership rules; recipient scoping; input and record validation; no fallbacks.
+**Enforced by MyGeotab:** only what the tenant's security clearances and sessions enforce — AddInData method clearances (per method, not per record). **UNVERIFIED** for this application.
+**Therefore not protected:** a user with AddInData Add/Set/Remove (or Get) clearance can bypass every OPEX rule via the raw API — approve own bookings, edit the role mapping or settings, read/alter notifications and audit. This is why write, approval and admin capabilities stay off. Client-side checks must not be described as strong enforcement. Audit is append-only by API surface only and is not tamper-proof; timestamps and actor ids are client-supplied.
+Other: source maps are published; legacy backend contains its own (fail-closed) auth scaffold and must not be deployed with the native Add-In.

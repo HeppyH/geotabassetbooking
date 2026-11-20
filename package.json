@@ -1,0 +1,17 @@
+{
+  "name": "opex-vehicle-booking",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": ["apps/web", "apps/api"],
+  "scripts": {
+    "dev": "npm --workspace apps/web run dev",
+    "dev:web": "npm --workspace apps/web run dev",
+    "build": "npm --workspace apps/web run build",
+    "test": "npm --workspace apps/web run test",
+    "typecheck": "npm --workspace apps/web exec -- tsc -p tsconfig.json --noEmit",
+    "legacy:dev:api": "npm --workspace apps/api run dev",
+    "legacy:typecheck": "npm --workspace apps/api run typecheck",
+    "legacy:test": "npm --workspace apps/api run test",
+    "legacy:db:migrate": "node scripts/migrate.mjs"
+  }
+}

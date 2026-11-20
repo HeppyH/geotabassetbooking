@@ -1,0 +1,2 @@
+# Official Documentation References
+See `../official-geotab-documentation-matrix.md` (Phase A table plus the implementation additions). Pages used: Add-In Storage, AddInData, Service Add-Ins, Developing Add-Ins, User, Device, DriverChange, rate limits. Read through summarizing fetch tools; wording should be re-checked against the live pages during sandbox validation. Items labelled UNVERIFIED throughout remain so.

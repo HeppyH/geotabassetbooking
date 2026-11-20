@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  # Target architecture: MyGeotab native Add-In (React + TypeScript, AddInData only).
+  # Installs ONLY the web workspace: no Hono, PostgreSQL or Cloudflare tooling is needed.
+  native-addin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install web dependencies only
+        run: npm install --workspace apps/web --include-workspace-root
+
+      - name: TypeScript validation
+        run: npm run typecheck
+
+      - name: Web, service add-in and architecture tests
+        run: npm test
+
+      - name: Production build (native add-in)
+        run: npm run build
+
+  # Legacy Hono / PostgreSQL / Cloudflare scaffold. Retained and isolated until it is retired;
+  # it is NOT the target runtime and is not a deployment gate for the native add-in.
+  legacy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Legacy API typecheck
+        run: npm run legacy:typecheck
+
+      - name: Legacy API tests
+        run: npm run legacy:test

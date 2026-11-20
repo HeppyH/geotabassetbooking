@@ -1,0 +1,3 @@
+# Tests and Evidence
+`npm test` (apps/web): 240 pass / 0 fail (223 + 17 in `authzAndMasterData.test.mjs`); typecheck clean. Covers: roles and bootstrap, mapping parsing, role resolution, `User.role` ignored, permission matrix, self-approval for every role, ownership, unknown role/action/actor, `loadRoleMapping` (missing/ambiguous/invalid/valid/failing), vehicle and driver mapping, active windows, duplicates, optional driver and reference validation, derivation helper, identity denials, runtime wiring (no mapping, unmapped, requester/approver, role cannot exceed gates, no mapping load without read capability).
+**Mocks only. Not tenant validation.** A bug found by these tests and fixed: a duplicated role-mapping record previously resolved to "first wins".

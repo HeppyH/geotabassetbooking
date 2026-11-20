@@ -1,0 +1,4 @@
+# Tests and Evidence
+`npm test` (apps/web): 268 pass / 0 fail (240 + 27 in `bookingWorkflow.test.mjs` + 1 architecture). Typecheck clean.
+Covered: transition table, happy paths, invalid and terminal transitions, self-approval for every role, reason rules, cancel rules, duplicate no-ops, edit locking; local→UTC in Asia/Jakarta, New_York (DST), Kolkata, cross-midnight and multi-day, DST gap/overlap, invalid input, limits; overlap boundaries, status/vehicle filtering, buffers, duplicates, simulated race reconciliation; record model validation; search/visibility; native provider enforcement (approve once, duplicate no-op, self-approval, invalid transition, missing reason, spoofed approver, role denial before any API call).
+**Mocks only. The simulated race is a pure-function demonstration, not evidence that AddInData prevents or detects races in a real tenant.**
