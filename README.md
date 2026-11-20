@@ -4,11 +4,11 @@
 
 ## Architecture (target)
 
-A MyGeotab **Custom Page Add-In**: React + TypeScript, the MyGeotab API, and **AddInData as the only persistent application storage**. There is **no external application database and no external application backend** (no PostgreSQL, Hono, Cloudflare Worker, or external auth). Hosting is static HTTPS files only.
+A MyGeotab **Custom Page Add-In**: React + TypeScript, the MyGeotab API, and **AddInData** as the only persistent application storage. There is **no external application database and no external application backend** (no PostgreSQL, Hono, Cloudflare Worker, or external auth). Hosting is static HTTPS files only.
 
 ```text
 MyGeotab page → Add-In (apps/web) → gated MyGeotab api → AddInData
-                     └ offline simulation (dev only, separate entry, never in the production build)
+                      └ offline simulation (dev only, separate entry, never in the production build)
 ```
 
 Safety defaults (all in code, not settings):
@@ -53,3 +53,5 @@ Do not deploy or register until sandbox validation passes. Static hosting only; 
 ## Known open items
 
 Role enforcement against direct API calls, AddInData behaviour (details format, limits, concurrency), Service Add-In worker format and delivery, vehicle/driver field availability, and booking double-booking protection are **unproven** and need a MyGeotab sandbox. See `docs/mygeotab-native/remaining-blockers.md`.
+
+Vehicle Booking Management System integrated with MyGeotab for fleet management, booking approvals, and real-time notifications.
